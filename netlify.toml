@@ -1,0 +1,7 @@
+[build]
+  functions = "functions"
+
+[[redirects]]
+  from = "/verify-otp"
+  to = "/.netlify/functions/verify-otp"
+  status = 200
