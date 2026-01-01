@@ -31,6 +31,12 @@ app.post('/verify-otp', (req, res) => {
     }
 });
 
+// Serve index.html for all other routes (for Team A/B paths)
+// Serve index.html for all other routes (for Team A/B paths)
+app.get(/(.*)/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

@@ -1,7 +1,14 @@
 [build]
   functions = "functions"
 
+# Redirect API calls to the function
 [[redirects]]
   from = "/verify-otp"
   to = "/.netlify/functions/verify-otp"
+  status = 200
+
+# Redirect everything else to index.html for SPA routing (Team A/B paths)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200

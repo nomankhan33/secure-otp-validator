@@ -27,6 +27,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             font-family: 'Poppins', sans-serif;
             color: var(--text-color);
@@ -224,6 +225,21 @@
         button .btn-text {
             display: inline;
         }
+
+        .team-message {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #00f2fe;
+            /* Vibrant Cyan */
+            text-transform: uppercase;
+            line-height: 1.4;
+            letter-spacing: 2px;
+            display: none;
+            /* Hidden by default */
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -233,6 +249,8 @@
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
+
+    <div id="teamMessage" class="team-message"></div>
 
     <div class="container">
 
@@ -260,11 +278,22 @@
             <p style="font-size: 14px; opacity: 0.8;">Your secure PIN is:</p>
             <div class="pin">----</div>
         </div>
-
     </div>
 
 
     <script>
+        // Check URL for Team Messages
+        const path = window.location.pathname;
+        const teamMsg = document.getElementById('teamMessage');
+
+        if (path === '/1') {
+            teamMsg.innerText = "Team A\nGo to Cafeteria Room to find the clue";
+            teamMsg.style.display = 'block';
+        } else if (path === '/2') {
+            teamMsg.innerText = "Team B\nGo to Tech Cabin to find the clue";
+            teamMsg.style.display = 'block';
+        }
+
         const inputs = document.querySelectorAll('.otp-inputs input');
 
         inputs.forEach((input, index) => {
