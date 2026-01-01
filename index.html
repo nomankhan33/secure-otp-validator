@@ -334,6 +334,7 @@
 
             // Strict Validation: Ensure exactly 3 digits
             if (!/^\d{3}$/.test(pin)) {
+                errorMsg.innerText = "Incorrect Access Code";
                 errorMsg.style.display = "block";
                 inputs.forEach(input => input.value = '');
                 inputs[0].focus();
@@ -365,6 +366,7 @@
                         }
                     }, 500);
                 } else {
+                    errorMsg.innerText = "Incorrect Access Code";
                     errorMsg.style.display = "block";
                     // Reset button
                     btn.disabled = false;
