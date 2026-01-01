@@ -242,9 +242,9 @@
             <p style="font-size: 14px; opacity: 0.8; margin-bottom: 20px;">Enter the 3-digit access code</p>
 
             <div class="otp-inputs">
-                <input type="text" maxlength="1">
-                <input type="text" maxlength="1">
-                <input type="text" maxlength="1">
+                <input type="text" maxlength="1" pattern="\d*" inputmode="numeric">
+                <input type="text" maxlength="1" pattern="\d*" inputmode="numeric">
+                <input type="text" maxlength="1" pattern="\d*" inputmode="numeric">
             </div>
 
             <button onclick="submitPin()">
@@ -262,6 +262,7 @@
         </div>
 
     </div>
+
 
     <script>
         const inputs = document.querySelectorAll('.otp-inputs input');
@@ -311,6 +312,14 @@
 
             // Reset UI
             errorMsg.style.display = "none";
+
+            // Strict Validation: Ensure exactly 3 digits
+            if (!/^\d{3}$/.test(pin)) {
+                errorMsg.style.display = "block";
+                inputs.forEach(input => input.value = '');
+                inputs[0].focus();
+                return;
+            }
 
             // Show loading
             btn.disabled = true;
