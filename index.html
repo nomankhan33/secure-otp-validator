@@ -270,6 +270,14 @@
         inputs.forEach((input, index) => {
             // Handle keydown for backspace and overwriting
             input.addEventListener('keydown', (e) => {
+                const errorMsg = document.getElementById("errorMsg");
+                // Hide error on backspace or valid number
+                if (e.key === 'Backspace' || (e.key >= '0' && e.key <= '9')) {
+                    if (errorMsg.innerText === "Numbers only please") {
+                        errorMsg.style.display = "none";
+                    }
+                }
+
                 if (e.key === 'Backspace') {
                     if (input.value.length === 0 && index > 0) {
                         e.preventDefault();
@@ -284,9 +292,20 @@
             // Handle input for moving to next field
             input.addEventListener('input', (e) => {
                 const val = e.data || input.value;
+                const errorMsg = document.getElementById("errorMsg");
+
                 // Ensure only digits (extra safety if user pastes)
                 if (!/^\d$/.test(val)) {
                     input.value = '';
+
+                    // UX: Show error message
+                    errorMsg.innerText = "Numbers only please";
+                    errorMsg.style.display = "block";
+                    // Trigger shake animation again
+                    errorMsg.style.animation = 'none';
+                    errorMsg.offsetHeight; /* trigger reflow */
+                    errorMsg.style.animation = "shake 0.4s ease-in-out";
+
                     return;
                 }
 
