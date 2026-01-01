@@ -251,6 +251,7 @@
     </div>
 
     <div id="teamMessage" class="team-message"></div>
+    <div class="clue-message">Clue: The light of candle will guide you to the Gold</div>
 
     <div class="container">
 
@@ -275,7 +276,8 @@
         <!-- SCREEN 2 : NEW PIN -->
         <div id="pinScreen" class="pin-screen">
             <h2>Access Granted</h2>
-            <p style="font-size: 14px; opacity: 0.8;">Your secure PIN is:</p>
+            <p style="font-size: 16px; opacity: 0.9; margin-bottom: 10px;">Find the Bag in the Main Cabin and unlock
+                your Treasure</p>
             <div class="pin">----</div>
         </div>
     </div>
@@ -287,10 +289,10 @@
         const teamMsg = document.getElementById('teamMessage');
 
         if (path === '/1') {
-            teamMsg.innerText = "Team A\nGo to Main Hall to find the clue";
+            teamMsg.innerText = "Team A\nGo to Room No - 1";
             teamMsg.style.display = 'block';
         } else if (path === '/2') {
-            teamMsg.innerText = "Team B\nGo to Main Hall to find the clue";
+            teamMsg.innerText = "Team B\nGo to Room No - 2";
             teamMsg.style.display = 'block';
         }
 
@@ -390,6 +392,13 @@
                     setTimeout(() => { // Artificially smooth out the transition
                         document.getElementById("otpScreen").style.display = "none";
                         document.getElementById("pinScreen").style.display = "block";
+
+                        // Hide Team Message and Clue
+                        const teamMsg = document.getElementById('teamMessage');
+                        const clueMsg = document.querySelector('.clue-message');
+                        if (teamMsg) teamMsg.style.display = 'none';
+                        if (clueMsg) clueMsg.style.display = 'none';
+
                         if (data.secretPin) {
                             document.querySelector(".pin").innerText = data.secretPin;
                         }
